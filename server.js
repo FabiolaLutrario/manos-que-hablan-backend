@@ -4,8 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 const db = require("./config/db");
-const routes = require("./routes/index.routes");
-
+const routes = require("./routes/index");
 
 const app = express();
 
@@ -26,8 +25,11 @@ app.use((err, req, res, next) => {
 
 app.use("/api", routes);
 
-db.sync({ force: false }).then(() => {
-  app.listen( process.env.PORT, () => console.log(`Server in port `, process.env.PORT));
-})
-.catch((err) => console.error(err));
+db.sync({ force: false })
+  .then(() => {
+    app.listen(process.env.PORT, () =>
+      console.log(`Server in port `, process.env.PORT)
+    );
+  })
+  .catch((err) => console.error(err));
 module.exports = app;

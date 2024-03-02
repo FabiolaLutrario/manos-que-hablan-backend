@@ -1,5 +1,6 @@
 const db = require("../config/db")
 const { Sequelize, DataTypes, Model } = require('sequelize');
+const Student = require("./Student");
 const sequelize = new Sequelize(db);
 
 class Note extends Model { }
@@ -31,6 +32,7 @@ Note.init({
     modelName: 'Note'
 });
 
+Note.belongsTo(Student)
 // TODO --> add relations with other models
 
 module.exports = Note

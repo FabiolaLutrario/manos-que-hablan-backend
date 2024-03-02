@@ -2,6 +2,9 @@ const db = require("../config/db")
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize(db);
 
+const Student = require("./Student")
+const User = require("./User")
+
 class Comment extends Model { }
 
 Comment.init({
@@ -11,13 +14,13 @@ Comment.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    body : {
+    body: {
         type: DataTypes.TEXT,
         allowNull: false
     },
     modified: {
-        type : DataTypes.DATE,
-        allowNull : false
+        type: DataTypes.DATE,
+        allowNull: false
     }
 
 }, {
@@ -25,6 +28,8 @@ Comment.init({
     modelName: 'Comment'
 });
 
-// TODO --> add relations with other models
+
+Comment.belongsTo(Student)
+Comment.belongsTo(User)
 
 module.exports = Comment

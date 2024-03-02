@@ -2,6 +2,8 @@ const db = require("../config/db")
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize(db);
 
+const Comment = require("./Comment")
+
 class User extends Model {}
 
 User.init({
@@ -36,6 +38,8 @@ User.init({
   sequelize, 
   modelName: 'User' 
 });
+
+User.hasMany(Comment)
 
 // TODO --> add relations with other models
 

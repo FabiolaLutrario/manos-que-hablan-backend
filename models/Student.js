@@ -2,6 +2,12 @@ const db = require("../config/db")
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize(db);
 
+const Comment = require("./Comment");
+const Note = require("./Note");
+const Attend = require("./Attend")
+const Attend = require("./Payment");
+const Payment = require("./Payment");
+
 class Student extends Model { }
 
 Student.init({
@@ -45,6 +51,11 @@ Student.init({
     sequelize,
     modelName: 'Student'
 });
+
+Student.hasMany(Comment)
+Student.hasMany(Note)
+Student.hasMany(Payment)
+Student.belongsToMany(Attend)
 
 // TODO --> add relations with other models
 

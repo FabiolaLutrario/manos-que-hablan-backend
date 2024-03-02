@@ -1,7 +1,11 @@
 const { Sequelize } = require("sequelize");
-const db = new Sequelize("manos-que-hablan", "postgres", null, {
-  host: "localhost",
+
+const { DB_NAME, DB_HOST, DB_USER, DB_PASSWORD } = process.env
+
+const db = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
   dialect: "postgres",
   logging: false,
 });
+
 module.exports = db;

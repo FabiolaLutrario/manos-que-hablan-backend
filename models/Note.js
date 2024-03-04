@@ -33,6 +33,5 @@ Note.init({
 });
 
 Note.belongsTo(Student)
-// TODO --> add relations with other models
 
 module.exports = Note

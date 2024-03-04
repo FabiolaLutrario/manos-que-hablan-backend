@@ -36,6 +36,5 @@ Attend.init({
 });
 
 Attend.belongsToMany(Student)
-    // TODO --> add relations with other models
 
 module.exports = Attend

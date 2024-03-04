@@ -57,6 +57,5 @@ Student.hasMany(Note)
 Student.hasMany(Payment)
 Student.belongsToMany(Attend)
 
-// TODO --> add relations with other models
 
 module.exports = Student

@@ -41,6 +41,4 @@ User.init({
 
 User.hasMany(Comment)
 
-// TODO --> add relations with other models
-
 module.exports = User

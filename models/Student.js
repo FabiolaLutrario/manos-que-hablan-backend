@@ -26,7 +26,7 @@ Student.init({
         allowNull: false
     },
     phone: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: false
     },
     document: {
@@ -43,7 +43,7 @@ Student.init({
     },
     email: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     }
 
 

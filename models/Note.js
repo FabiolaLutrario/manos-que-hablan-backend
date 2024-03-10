@@ -1,7 +1,5 @@
 const db = require("../config/db")
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const Student = require("./Student");
-const sequelize = new Sequelize(db);
+const {  DataTypes, Model } = require('sequelize');
 
 class Note extends Model { }
 
@@ -28,10 +26,9 @@ Note.init({
 
 
 }, {
-    sequelize,
-    modelName: 'Note'
+    sequelize : db,
+    modelName: 'note'
 });
 
-Note.belongsTo(Student)
 
 module.exports = Note

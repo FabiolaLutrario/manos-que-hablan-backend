@@ -1,12 +1,5 @@
 const db = require("../config/db")
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize(db);
-
-const Comment = require("./Comment");
-const Note = require("./Note");
-const Attend = require("./Attend")
-const Attend = require("./Payment");
-const Payment = require("./Payment");
+const { DataTypes, Model } = require('sequelize');
 
 class Student extends Model { }
 
@@ -22,7 +15,7 @@ Student.init({
         allowNull: false,
     },
     address: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: false
     },
     phone: {
@@ -30,32 +23,29 @@ Student.init({
         allowNull: false
     },
     document: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: false
     },
     instagram: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: true
     },
     facebook: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: true
     },
     email: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: true
     }
 
 
 }, {
-    sequelize,
-    modelName: 'Student'
+    sequelize : db,
+    modelName: 'student',
 });
 
-Student.hasMany(Comment)
-Student.hasMany(Note)
-Student.hasMany(Payment)
-Student.belongsToMany(Attend)
+
 
 
 module.exports = Student

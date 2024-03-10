@@ -1,7 +1,5 @@
 const db = require("../config/db")
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const Student = require("./Student");
-const sequelize = new Sequelize(db);
+const {  DataTypes, Model } = require('sequelize');
 
 class Payment extends Model { }
 
@@ -13,7 +11,7 @@ Payment.init({
         primaryKey: true,
     },
     concept : {
-        type : DataTypes.ENUM,
+        type : DataTypes.ENUM({values : ["Pago","Cuota"]}),   // valores de prueba, consultar valores finales
         allowNull : false
     },
     amount : {
@@ -42,11 +40,10 @@ Payment.init({
     }
 
 }, {
-    sequelize,
-    modelName: 'Payment'
+    sequelize : db,
+    modelName: 'payment'
 });
 
-Payment.belongsTo(Student)
 
 module.exports = Payment
 

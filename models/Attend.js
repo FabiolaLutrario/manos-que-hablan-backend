@@ -1,7 +1,5 @@
 const db = require("../config/db")
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const Student = require("./Student");
-const sequelize = new Sequelize(db);
+const {  DataTypes, Model } = require('sequelize');
 
 class Attend extends Model { }
 
@@ -31,10 +29,9 @@ Attend.init({
 
 
 }, {
-    sequelize,
-    modelName: 'Attend'
+    sequelize: db,
+    modelName: 'attend'
 });
 
-Attend.belongsToMany(Student)
 
 module.exports = Attend

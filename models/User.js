@@ -1,8 +1,5 @@
 const db = require("../config/db")
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize(db);
-
-const Comment = require("./Comment")
+const { DataTypes, Model } = require('sequelize');
 
 class User extends Model {}
 
@@ -35,10 +32,9 @@ User.init({
 
 
 }, {
-  sequelize, 
-  modelName: 'User' 
+  sequelize : db, 
+  modelName: 'user' 
 });
 
-User.hasMany(Comment)
 
 module.exports = User

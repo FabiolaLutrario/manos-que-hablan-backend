@@ -1,9 +1,5 @@
 const db = require("../config/db")
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize(db);
-
-const Student = require("./Student")
-const User = require("./User")
+const { DataTypes, Model } = require('sequelize');
 
 class Comment extends Model { }
 
@@ -24,12 +20,9 @@ Comment.init({
     }
 
 }, {
-    sequelize,
-    modelName: 'Comment'
+    sequelize :db,
+    modelName: 'comment'
 });
 
-
-Comment.belongsTo(Student)
-Comment.belongsTo(User)
 
 module.exports = Comment

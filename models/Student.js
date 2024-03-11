@@ -16,15 +16,15 @@ Student.init({
     },
     address: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     phone: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     document: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     instagram: {
         type: DataTypes.STRING,

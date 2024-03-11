@@ -21,7 +21,8 @@ Comment.init({
 
 }, {
     sequelize :db,
-    modelName: 'comment'
+    modelName: 'comment',
+    underscored : true
 });
 
 

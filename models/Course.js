@@ -30,7 +30,8 @@ Course.init({
 
 }, {
     sequelize: db,
-    modelName: 'course'
+    modelName: 'course',
+    underscored : true
 });
 
 

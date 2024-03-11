@@ -1,9 +1,9 @@
 const db = require("../config/db")
 const {  DataTypes, Model } = require('sequelize');
 
-class Attend extends Model { }
+class Course extends Model { }
 
-Attend.init({
+Course.init({
 
     id: {
         type: DataTypes.INTEGER,
@@ -15,7 +15,7 @@ Attend.init({
         allowNull : false
     },
     year : {
-        type : DataTypes.INTEGER,
+        type : DataTypes.STRING,
         allowNull : false
     },
     semester : {
@@ -23,15 +23,15 @@ Attend.init({
         allowNull : false
     },
     level : {
-        type : DataTypes.INTEGER,
+        type : DataTypes.STRING,
         allowNull : false
     }
 
 
 }, {
     sequelize: db,
-    modelName: 'attend'
+    modelName: 'course'
 });
 
 
-module.exports = Attend
+module.exports = Course

@@ -19,7 +19,7 @@ Payment.init({
         allowNull : false
     },
     payday : {
-        type : DataTypes.STRING,
+        type : DataTypes.DATE,
         allowNull : false
     },
     billing : {
@@ -41,7 +41,8 @@ Payment.init({
 
 }, {
     sequelize : db,
-    modelName: 'payment'
+    modelName: 'payment',
+    underscored :true
 });
 
 

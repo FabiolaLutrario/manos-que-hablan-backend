@@ -27,7 +27,8 @@ Note.init({
 
 }, {
     sequelize : db,
-    modelName: 'note'
+    modelName: 'note',
+    underscored : true
 });
 
 

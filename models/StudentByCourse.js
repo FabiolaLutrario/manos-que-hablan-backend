@@ -7,7 +7,8 @@ StudentByCourse.init({}, {
     sequelize: db,
     modelName: 'student_by_course',
     timestamps : false,
-    freezeTableName : true
+    freezeTableName : true,
+    underscored : true
 });
 
 

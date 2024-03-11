@@ -43,6 +43,7 @@ Student.init({
 }, {
     sequelize : db,
     modelName: 'student',
+    underscored : true
 });
 
 

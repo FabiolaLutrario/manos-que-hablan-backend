@@ -13,12 +13,11 @@ const seedStudents = async () => {
         console.error('Unable to connect to the database:', error);
     }
 
-
     let i = 1
 
     for (const student of studentsData) {
 
-        console.log(`Creando estudiante ${i} de ${studentsData.length} : ${Math.round((i * 100) / studentsData.length)}% completo`)
+        console.log(`Creando estudiante ${i} de ${studentsData.length} : ${Math.floor((i * 100) / studentsData.length)}% completo`)
 
         const { name, direction, phone, document, attends, instagram, facebook, email } = student
 
@@ -78,7 +77,7 @@ const seedCourses = async () => {
 
         const { label, year, semester, level } = item
 
-        console.log(`Creando curso ${i} de ${data.length} : ${Math.round((i * 100) / data.length)}% completo`)
+        console.log(`Creando curso ${i} de ${data.length} : ${Math.floor((i * 100) / data.length)}% completo`)
 
         const createdCourse = await Course.create({
             label,
@@ -96,8 +95,11 @@ const seedCoursesByStudent = async () => {
     // vamos a seedear la tabla que relaciona los estudiantes con los cursos en los que 
     // participan (es una tabla pivot con 2 foreign keys, una es el id del estudiante, y la otra el id del curso)
     // puede suceder que un estudiante se repita y tenga mas de un curso.
+    let i = 1
 
     for (const student of studentsData) {
+
+        console.log(`Creando relaciones con cursos para el estudiante ${i} de ${studentsData.length} : ${Math.floor((i * 100) / studentsData.length)}% completo`)
 
         const { attends, name } = student
 
@@ -117,6 +119,8 @@ const seedCoursesByStudent = async () => {
                 const createdRelation = await StudentByCourse.create({ studentId, courseId })
             }
         }
+
+        i++
 
     }
 

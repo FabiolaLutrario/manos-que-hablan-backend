@@ -1,3 +1,3 @@
-const  {Attend, Comment, Note, Payment, Student, User} = require('./associations')
+const { Course, Comment, Note, Payment, Student, StudentByCourse, User } = require('./associations')
 
-module.exports = {Attend, Comment, Note, Payment, Student, User} 
+module.exports = { Course, Comment, Note, Payment, Student, StudentByCourse, User } 

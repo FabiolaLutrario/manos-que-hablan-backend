@@ -1,7 +1,21 @@
 const db = require("../config/db")
-const {  DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 
 class Payment extends Model { }
+
+const conceptValidValues = {
+    MAR: "marzo",
+    ABR: "abril",
+    MAY: "mayo",
+    JUN: "junio",
+    JUL: "julio",
+    AGO: "agosto",
+    SEP: "septiembre",
+    OCT: "octubre",
+    NOV: "noviembre",
+    DIC: "diciembre",
+    MAT: "matricula"
+}
 
 Payment.init({
 
@@ -10,39 +24,39 @@ Payment.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    concept : {
-        type : DataTypes.ENUM({values : ["Pago","Cuota"]}),   // valores de prueba, consultar valores finales
-        allowNull : false
+    concept: {
+        type: DataTypes.ENUM({ values: Object.values(conceptValidValues) }),
+        allowNull: false
     },
-    amount : {
-        type : DataTypes.INTEGER,
-        allowNull : false
+    amount: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     },
-    payday : {
-        type : DataTypes.DATE,
-        allowNull : false
+    payday: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
-    billing : {
-        type : DataTypes.STRING,
-        allowNull : false
+    billing: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
-    receipt : {
-        type : DataTypes.STRING,
-        allowNull : false
+    receipt: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
-    modality : {
-        type : DataTypes.STRING,
-        allowNull : false
+    modality: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
-    invoice : {
-        type : DataTypes.STRING,
-        allowNull : false
+    invoice: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 
 }, {
-    sequelize : db,
+    sequelize: db,
     modelName: 'payment',
-    underscored :true
+    underscored: true,
 });
 
 

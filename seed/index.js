@@ -1,7 +1,15 @@
 require('dotenv').config({ path: "../.env" })
 const db = require("../config/db")
-const { Student, Course, StudentByCourse } = require("../models")
+const { Student, Course, StudentByCourse, Payment } = require("../models")
 const studentsData = require('./data/students')
+const paymentsAgo21 = require("./data/payments/Ago21")
+const paymentsAgo22 = require("./data/payments/Ago22")
+const paymentsAgo23 = require("./data/payments/Ago23")
+const paymentsMar21 = require("./data/payments/Mar21")
+const paymentsMar22 = require("./data/payments/Mar22")
+const paymentsMar23 = require("./data/payments/Mar23")
+
+const fs = require('fs')
 const _ = require('lodash')
 
 const seedStudents = async () => {
@@ -126,6 +134,50 @@ const seedCoursesByStudent = async () => {
 
 }
 
+const seedPayments = async () => {
+
+    const allPayments = _.concat(paymentsAgo21, paymentsAgo22, paymentsAgo23, paymentsMar21, paymentsMar22, paymentsMar23)
+    let notFoundStudents = []
+    let i = 1
+    for (const payment of allPayments) {
+
+        console.log(`Creando pago ${i} de ${allPayments.length} : ${Math.floor((i * 100) / allPayments.length)}% completo`)
+
+        let { name, concept, amount, payday, billing } = payment
+
+        if (concept === "matrícula") concept = "matricula"
+        if (amount === "") amount = null
+        name = name.trim()
+
+        const student = await Student.findOne({ where: { name } })
+
+        if (student) {
+            const studentId = student.dataValues.id
+            const createdPayment = await Payment.create({
+                concept,
+                amount,
+                payday,
+                billing,
+                studentId
+            })
+        } else {
+            notFoundStudents.push(name)
+        }
+        i++
+    }
+    notFoundStudents = _.uniq(notFoundStudents)
+    if (notFoundStudents.length) {
+        console.log("Existen alumnos que no fueron encontrados en la base de datos, revisarlos en el archivo notFoundStudents.txt")
+          fs.writeFileSync('notFoundStudents.txt', notFoundStudents.join('\n'), (err) => {
+            if (err) {
+                console.error('Error al crear el archivo notFoundStudents.txt:', err);
+                return;
+            }
+            console.log('notFoundStudents.txt creado con exito');
+        });
+    }
+}
+
 
 const main = async () => {
 
@@ -133,6 +185,7 @@ const main = async () => {
     await seedStudents()
     await seedCourses()
     await seedCoursesByStudent()
+    await seedPayments()
 
     process.exit()
 

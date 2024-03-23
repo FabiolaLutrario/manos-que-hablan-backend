@@ -1,5 +1,6 @@
 node_modules/
 .env
 .vscode/settings.json
-seed/data
 package-lock.json
+seed/data
+notFoundStudents.txt

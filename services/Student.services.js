@@ -1,14 +1,27 @@
+const StudentRepository = require("../repositories/Student.repository")
 class StudentService {
-    
-    async createStudent(){
+
+    static async getAll({ query }) {
+
+        const students = await StudentRepository.getAll({ query })
+
+        return students
 
     }
 
-    async updateStudent(){
+    static async getById({id}) {
+
+        const student = await StudentRepository.getById({id})
+
+        return student
 
     }
 
-    async deleteStudent(){
+    async updateStudent() {
+
+    }
+
+    async deleteStudent() {
 
     }
 }

@@ -1,11 +1,28 @@
+const { Student, Course } = require("../models")
 class StudentRepository {
-    async createStudent(){
+
+    static async getAll({ query }) {
+
+            const { withCourses, ...rest } = query;
+        
+            const options = {
+                where: rest,
+                include: withCourses ? Course : [],
+            };
+        
+            const students = await Student.findAll(options);
+
+            return students;
         
     }
-    async updateStudent(){
+    static async getById({id}) {
+
+        const student = await Student.findByPk(id)
+
+        return student
 
     }
-    async deleteStudent(){
+    async deleteStudent() {
 
     }
 }

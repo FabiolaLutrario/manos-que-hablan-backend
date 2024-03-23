@@ -13,6 +13,7 @@ Actualmente el seed se encuentra listo para los siguientes modelos:
 - [x] Student (tabla de estudiantes)
 - [x] Courses (tabla de cursos)
 - [x] StudentByCourse (tabla que une el id de un estudiante con el id de los cursos en los que participó)
+- [x] Payments (tabla de pagos)
 
 Para correr el seedeo de la base de datos, se debe seguir el siguiente proceso:
 

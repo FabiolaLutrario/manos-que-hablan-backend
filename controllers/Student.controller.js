@@ -22,8 +22,9 @@ class StudentController {
         try {
 
             const { id } = req.params
+            const {query} = req
 
-            const response = await StudentService.getById({ id })
+            const response = await StudentService.getById({ id,query })
 
             return res.status(200).json(response)
             

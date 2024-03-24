@@ -9,9 +9,9 @@ class StudentService {
 
     }
 
-    static async getById({id}) {
+    static async getById({id,query}) {
 
-        const student = await StudentRepository.getById({id})
+        const student = await StudentRepository.getById({id,query})
 
         return student
 

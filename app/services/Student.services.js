@@ -1,4 +1,4 @@
-const StudentRepository = require("../repositories/Student.repository")
+const StudentRepository = require("#root/app/repositories/Student.repository.js")
 class StudentService {
 
     static async getAll({ query }) {

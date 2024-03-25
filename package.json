@@ -4,8 +4,11 @@
   "description": "Este es el repositorio Backend de la página Manos que Hablan",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "imports": {
+    "#root/*.js": "./*.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

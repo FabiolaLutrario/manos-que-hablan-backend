@@ -1,4 +1,4 @@
-const StudentService = require("../services/Student.services")
+const StudentService = require("#root/app/services/Student.services.js")
 class StudentController {
 
     static async getAll(req, res) {

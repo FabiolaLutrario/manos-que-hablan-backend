@@ -1,4 +1,4 @@
-const { Course, Payment, Note } = require("../models")
+const { Course, Payment, Note } = require("#root/app/models/index.js")
 
 class StudentHelper {
 

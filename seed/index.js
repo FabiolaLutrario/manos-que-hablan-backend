@@ -1,6 +1,6 @@
 require('dotenv').config({ path: "../.env" })
-const db = require("../config/db")
-const { Student, Course, StudentByCourse, Payment } = require("../models")
+const db = require("../app/config/db")
+const { Student, Course, StudentByCourse, Payment } = require("../app/models")
 const studentsData = require('./data/students')
 const paymentsAgo21 = require("./data/payments/Ago21")
 const paymentsAgo22 = require("./data/payments/Ago22")

@@ -1,10 +1,10 @@
-const Course = require("./Course")
-const Comment = require("./Comment")
-const Note = require("./Note")
-const Payment = require("./Payment")
-const Student = require("./Student")
-const User = require("./User")
-const StudentByCourse = require("./StudentByCourse")
+const Course = require("#root/app/models/Course.js")
+const Comment = require("#root/app/models/Comment.js")
+const Note = require("#root/app/models/Note.js")
+const Payment = require("#root/app/models/Payment.js")
+const Student = require("#root/app/models/Student.js")
+const User = require("#root/app/models/User.js")
+const StudentByCourse = require("#root/app/models/StudentByCourse.js")
 
 // Create associations in a separate file due to circular references between models
 Course.belongsToMany(Student, { through: "student_by_course" })

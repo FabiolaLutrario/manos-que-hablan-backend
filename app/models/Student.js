@@ -1,4 +1,4 @@
-const db = require("../config/db")
+const db = require("#root/app/config/db.js")
 const { DataTypes, Model } = require('sequelize');
 
 class Student extends Model { }

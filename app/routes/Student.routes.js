@@ -1,6 +1,6 @@
 const express = require("express");
 const StudentRouter = express.Router();
-const StudentController = require("../controllers/Student.controller")
+const StudentController = require("#root/app/controllers/Student.controller.js")
 
 StudentRouter.get("/", StudentController.getAll)
 StudentRouter.get("/:id", StudentController.getById)

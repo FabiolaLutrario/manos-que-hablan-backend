@@ -1,5 +1,5 @@
-const { Student, Course, Payment, Note, StudentByCourse } = require("../models")
-const StudentHelper = require("../helpers/Student.helper")
+const { Student, Course, Payment, Note, StudentByCourse } = require("#root/app/models/index.js")
+const StudentHelper = require("#root/app/helpers/Student.helper.js")
 class StudentRepository {
 
     static async getAll({ query }) {

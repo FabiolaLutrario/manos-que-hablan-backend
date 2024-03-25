@@ -22,12 +22,12 @@ class StudentController {
         try {
 
             const { id } = req.params
-            const {query} = req
+            const { query } = req
 
-            const response = await StudentService.getById({ id,query })
+            const response = await StudentService.getById({ id, query })
 
             return res.status(200).json(response)
-            
+
         } catch (error) {
 
         }
@@ -35,7 +35,22 @@ class StudentController {
 
     }
 
-    async deleteStudent() {
+    static async editById(req, res) {
+
+        try {
+            const { body } = req
+            const { id } = req.params
+
+            console.log(body)
+            console.log(id)
+
+            const response = await StudentService.editById({body,id})
+
+            return res.status(200).json(response)
+
+        } catch (error) {
+
+        }
 
     }
 

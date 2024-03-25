@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const { Student, Course, Payment } = require("../models")
 class StudentRepository {
 
@@ -17,21 +18,34 @@ class StudentRepository {
     }
     static async getById({ id, query }) {
 
-        const { withCourses, withPayments, ... rest } = query
         let includeArr = []
 
-        if(withCourses) includeArr.push(Course)
-        if(withPayments) includeArr.push(Payment)
+        if (query) {
+            const { withCourses, withPayments, ...rest } = query
 
-        const include = { include : includeArr}
+            if (withCourses) includeArr.push(Course)
+            if (withPayments) includeArr.push(Payment)
+        }
+
+        const include = { include: includeArr }
 
         const student = await Student.findByPk(id, include)
 
         return student
 
+
+
     }
-    
-    async deleteStudent() {
+
+    static async editById({ body, id }) {
+
+        const student = await this.getById({ id })
+
+        student.set(body)
+
+        const updatedStudent = await student.save()
+
+        return updatedStudent
 
     }
 }

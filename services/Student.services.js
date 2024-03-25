@@ -9,15 +9,21 @@ class StudentService {
 
     }
 
-    static async getById({id,query}) {
+    static async getById({ id, query }) {
 
-        const student = await StudentRepository.getById({id,query})
+        const student = await StudentRepository.getById({ id, query })
 
         return student
 
     }
 
-    async updateStudent() {
+    static async editById({ body, id }) {
+
+        console.log('hola 1')
+
+        const student = await StudentRepository.editById({ body, id })
+
+        return student
 
     }
 

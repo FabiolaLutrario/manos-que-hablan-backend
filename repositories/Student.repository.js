@@ -1,4 +1,4 @@
-const { Student, Course, Payment, Note } = require("../models")
+const { Student, Course, Payment, Note, StudentByCourse } = require("../models")
 const StudentHelper = require("../helpers/Student.helper")
 class StudentRepository {
 
@@ -6,7 +6,7 @@ class StudentRepository {
 
         let options = {}
 
-        if(query) options = StudentHelper.processQuery({ query })
+        if (query) options = StudentHelper.processQuery({ query })
 
         const students = await Student.findAll(options);
 
@@ -17,7 +17,7 @@ class StudentRepository {
 
         let options = {}
 
-        if(query) options = StudentHelper.processQuery({query})
+        if (query) options = StudentHelper.processQuery({ query })
 
         const student = await Student.findByPk(id, options)
 
@@ -34,6 +34,34 @@ class StudentRepository {
         const updatedStudent = await student.save()
 
         return updatedStudent
+
+    }
+
+    static async create({ body }) {
+
+        const { courseIds, ...rest } = body
+
+        let student = await Student.create(rest)
+
+        let addedCourses = []
+
+        if (courseIds) {
+            addedCourses = await this.addCoursesToStudent({ studentId: student.dataValues.id, courseIds })
+        }
+
+        return { student, addedCourses }
+    }
+
+    static async addCoursesToStudent({ studentId, courseIds }) {
+
+        let createdRelations = []
+
+        for (const courseId of courseIds) {
+            const relation = await StudentByCourse.create({ studentId, courseId })
+
+            createdRelations.push(relation)
+        }
+        return createdRelations
 
     }
 }

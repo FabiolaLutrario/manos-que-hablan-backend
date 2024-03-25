@@ -32,7 +32,6 @@ class StudentController {
 
         }
 
-
     }
 
     static async editById(req, res) {
@@ -41,10 +40,7 @@ class StudentController {
             const { body } = req
             const { id } = req.params
 
-            console.log(body)
-            console.log(id)
-
-            const response = await StudentService.editById({body,id})
+            const response = await StudentService.editById({ body, id })
 
             return res.status(200).json(response)
 
@@ -52,6 +48,19 @@ class StudentController {
 
         }
 
+    }
+
+    static async create(req, res) {
+        try {
+            const { body } = req
+            
+            const response = await StudentService.create({ body })
+
+            return res.status(201).json(response)
+
+        } catch (error) {
+
+        }
     }
 
 

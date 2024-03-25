@@ -19,15 +19,17 @@ class StudentService {
 
     static async editById({ body, id }) {
 
-        console.log('hola 1')
-
         const student = await StudentRepository.editById({ body, id })
 
         return student
 
     }
 
-    async deleteStudent() {
+    static async create({ body }) {
+
+        const student = await StudentRepository.create({ body })
+
+        return student
 
     }
 }

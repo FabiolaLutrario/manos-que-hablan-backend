@@ -1,15 +1,12 @@
-const { where } = require("sequelize");
-const { Student, Course, Payment } = require("../models")
+const { Student, Course, Payment, Note } = require("../models")
+const StudentHelper = require("../helpers/Student.helper")
 class StudentRepository {
 
     static async getAll({ query }) {
 
-        const { withCourses, withPayments, ...rest } = query;
+        let options = {}
 
-        const options = {
-            where: rest,
-            include: withCourses ? Course : [],
-        };
+        if(query) options = StudentHelper.processQuery({ query })
 
         const students = await Student.findAll(options);
 
@@ -18,22 +15,13 @@ class StudentRepository {
     }
     static async getById({ id, query }) {
 
-        let includeArr = []
+        let options = {}
 
-        if (query) {
-            const { withCourses, withPayments } = query
+        if(query) options = StudentHelper.processQuery({query})
 
-            if (withCourses) includeArr.push(Course)
-            if (withPayments) includeArr.push(Payment)
-        }
-
-        const include = { include: includeArr }
-
-        const student = await Student.findByPk(id, include)
+        const student = await Student.findByPk(id, options)
 
         return student
-
-
 
     }
 

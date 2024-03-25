@@ -1,15 +1,12 @@
-const { where } = require("sequelize");
-const { Student, Course, Payment } = require("../models")
+const { Student, Course, Payment, Note, StudentByCourse } = require("../models")
+const StudentHelper = require("../helpers/Student.helper")
 class StudentRepository {
 
     static async getAll({ query }) {
 
-        const { withCourses, withPayments, ...rest } = query;
+        let options = {}
 
-        const options = {
-            where: rest,
-            include: withCourses ? Course : [],
-        };
+        if (query) options = StudentHelper.processQuery({ query })
 
         const students = await Student.findAll(options);
 
@@ -18,22 +15,13 @@ class StudentRepository {
     }
     static async getById({ id, query }) {
 
-        let includeArr = []
+        let options = {}
 
-        if (query) {
-            const { withCourses, withPayments, ...rest } = query
+        if (query) options = StudentHelper.processQuery({ query })
 
-            if (withCourses) includeArr.push(Course)
-            if (withPayments) includeArr.push(Payment)
-        }
-
-        const include = { include: includeArr }
-
-        const student = await Student.findByPk(id, include)
+        const student = await Student.findByPk(id, options)
 
         return student
-
-
 
     }
 
@@ -46,6 +34,34 @@ class StudentRepository {
         const updatedStudent = await student.save()
 
         return updatedStudent
+
+    }
+
+    static async create({ body }) {
+
+        const { courseIds, ...rest } = body
+
+        let student = await Student.create(rest)
+
+        let addedCourses = []
+
+        if (courseIds) {
+            addedCourses = await this.addCoursesToStudent({ studentId: student.dataValues.id, courseIds })
+        }
+
+        return { student, addedCourses }
+    }
+
+    static async addCoursesToStudent({ studentId, courseIds }) {
+
+        let createdRelations = []
+
+        for (const courseId of courseIds) {
+            const relation = await StudentByCourse.create({ studentId, courseId })
+
+            createdRelations.push(relation)
+        }
+        return createdRelations
 
     }
 }

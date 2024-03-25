@@ -21,7 +21,7 @@ class StudentRepository {
         let includeArr = []
 
         if (query) {
-            const { withCourses, withPayments, ...rest } = query
+            const { withCourses, withPayments } = query
 
             if (withCourses) includeArr.push(Course)
             if (withPayments) includeArr.push(Payment)
